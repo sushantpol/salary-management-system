@@ -1,0 +1,99 @@
+/* Reset */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #333;
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 30px;
+}
+
+/* Inputs */
+input {
+  padding: 10px;
+  margin: 8px 10px 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Employee list card */
+.card {
+  background: #fafafa;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+/* Action buttons */
+.card button {
+  margin-right: 8px;
+  background-color: #2196F3;
+}
+
+.card button:last-child {
+  background-color: #f44336;
+}
+
+/* Divider */
+hr {
+  margin: 30px 0;
+}
+
+/* Error */
+.error {
+  color: red;
+}
+
+/* Loading */
+.loading {
+  color: #555;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+@keyframes highlight {
+  0% { background-color: #fff3cd; }
+  100% { background-color: transparent; }
+}
+
+.form-highlight {
+  animation: highlight 1s ease-in-out;
+}

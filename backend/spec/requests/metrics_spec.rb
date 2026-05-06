@@ -77,11 +77,11 @@ RSpec.describe "Metrics", type: :request do
   end
 
   describe "GET /metrics/job_title/:job_title" do
-    context "when employees with the job title exist" do
+    context "when employees with the job title exist and country blank" do
       before do
-        create(:employee, job_title: "Software Engineer", salary: 70000)
-        create(:employee, job_title: "Software Engineer", salary: 90000)
-        create(:employee, job_title: "Software Engineer", salary: 110000)
+        create(:employee, job_title: "Software Engineer", country: 'India', salary: 70000)
+        create(:employee, job_title: "Software Engineer", country: "United States", salary: 90000)
+        create(:employee, job_title: "Software Engineer", country: "Australia", salary: 110000)
       end
 
       it "returns success status" do
@@ -107,6 +107,39 @@ RSpec.describe "Metrics", type: :request do
         get "/metrics/job_title/Software%20Engineer", headers: json_headers
 
         expect(json_data[:employee_count]).to eq(3)
+      end
+    end
+
+    context "when employees with the job title exist and country exist" do
+      before do
+        create(:employee, job_title: "Software Engineer", country: 'India', salary: 70000)
+        create(:employee, job_title: "Software Engineer", country: "India", salary: 90000)
+        create(:employee, job_title: "Software Engineer", country: "Australia", salary: 110000)
+      end
+
+      it "returns success status" do
+        get "/metrics/job_title/Software%20Engineer?country=India", headers: json_headers
+
+        expect(response).to have_http_status(:ok)
+        expect(json_success?).to be true
+      end
+
+      it "returns job title" do
+        get "/metrics/job_title/Software%20Engineer?country=India", headers: json_headers
+
+        expect(json_data[:job_title]).to eq("Software Engineer")
+      end
+
+      it "returns average salary" do
+        get "/metrics/job_title/Software%20Engineer?country=India", headers: json_headers
+
+        expect(json_data[:avg_salary]).to eq(80000.0)
+      end
+
+      it "returns employee count" do
+        get "/metrics/job_title/Software%20Engineer?country=India", headers: json_headers
+
+        expect(json_data[:employee_count]).to eq(2)
       end
     end
 

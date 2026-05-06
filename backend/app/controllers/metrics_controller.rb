@@ -6,7 +6,11 @@ class MetricsController < ApplicationController
   end
 
   def by_job_title
-    metrics = SalaryMetricsService.metrics_by_job_title(params[:job_title])
+    if params[:country].present?
+      metrics = SalaryMetricsService.metrics_by_job_title_and_country(params[:job_title], params[:country])
+    else
+      metrics = SalaryMetricsService.metrics_by_job_title(params[:job_title])
+    end
     render_success(metrics, "Job title metrics retrieved successfully")
   end
 
